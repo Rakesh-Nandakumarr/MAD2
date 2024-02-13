@@ -24,7 +24,7 @@
                 <div class="sm:flex-auto">
                     <h1 class="text-base font-semibold leading-6 text-gray-900">Product Categories</h1>
                     <p class="mt-2 text-sm text-gray-700">
-                        A list of all the product categories in your account including their name, slug and actions.
+                        A list of all the product categories in your account including their name, link and actions.
                     </p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
