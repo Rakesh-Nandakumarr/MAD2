@@ -38,8 +38,7 @@
         "refresh" : [
             "@php artisan db:wipe",
             "@php artisan migrate",
-            "@php artisan db:seed",
-            "@php artisan serve"
+            "@php artisan db:seed"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

@@ -13,7 +13,31 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                        {{ __('Roast & Relax') }}
+                        {{ __('Home') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('home') }}" >
+                        {{ __('Our Menu') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('home') }}" >
+                        {{ __('Order Online') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('home') }}" >
+                        {{ __('About Us') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('home') }}" >
+                        {{ __('Contact') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -116,15 +140,7 @@
                                     {{ __('Categories') }}
                                 </x-dropdown-link>
 
-                                <div class="border-t border-gray-200"></div>
 
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}" x-data>
-                                    @csrf
-
-                                    <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
                                 </form>
                             </x-slot>
                         </x-dropdown>
@@ -169,9 +185,9 @@
                                 </x-dropdown-link>
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                    <!-- <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}
-                                    </x-dropdown-link>
+                                    </x-dropdown-link> -->
                                 @endif
 
                                 <div class="border-t border-gray-200"></div>
