@@ -20,15 +20,11 @@ return new class extends Migration
 
             $table->longText('description')->nullable();
 
-            $table
-            ->foreignId('parent_id')
-            ->nullable()
-            ->constrained('product_categories', 'id')
-            ->nullOnDelete();
-
             $table->boolean('status')->default(true);
 
-
+            $table->string('meta_title')->nullable();
+            $table->longText('meta_description')->nullable();
+            $table->longText('meta_keywords')->nullable();
 
             $table->timestamps();
         });

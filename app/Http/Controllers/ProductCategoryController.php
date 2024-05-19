@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         return view('admin.product_category.index', [
-            'product_categories' => ProductCategory::paginate(10)
+            'product_categories' => ProductCategory::orderBy('id', 'DESC')->paginate(10)
         ]);
     }
 
