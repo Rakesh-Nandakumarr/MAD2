@@ -35,7 +35,7 @@ class CategoryController extends Controller
 
         return view('category', [
             'category' => $category,
-            'products' => $category->products
+            'products' => $category->products->where('status', 1)
         ]);
     }
 }

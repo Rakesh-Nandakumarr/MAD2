@@ -1,36 +1,19 @@
 <?php
 
-use function Livewire\Volt\{state};
+use function Livewire\Volt\{state, mount};
 use App\Models\Cart;
+use App\Models\Product;
 
 state([
     'product' => null,
     'quantity' => 1,
     'cart' => null,
+    'stock' => 0,
 ]);
 
-$decrement = function () {
-    $quantity = $this->quantity;
-    $quantity = $quantity - 1;
-    if ($quantity < 1) {
-        $quantity = 1;
-    }
-
-    $this->quantity = $quantity;
-};
-
-$increment = function () {
-    $quantity = $this->quantity;
-    $this->quantity = $quantity + 1;
-
-    // get the product stock
-    $stock = $this->product->stocks;
-
-    // check if the quantity is greater than the stock
-    if ($this->quantity > $stock) {
-        $this->quantity = $stock;
-    }
-};
+mount(function () {
+    $this->stock = Product::find($this->product->id)->stock;
+});
 
 $addToCart = function () {
 
@@ -75,27 +58,59 @@ $addToCart = function () {
 
     $cart->save();
 
+    
     // dispatch cart refresh event
     $this->dispatch('cartRefresh');
 }
 
 ?>
 
-<div>
+<div x-data="{
+    product: @entangle('product'),
+    quantity: @entangle('quantity'),
+    cart: @entangle('cart'),
+    stock: @entangle('stock'),
+    decrement() {
+        if (this.quantity > 1) {
+            this.quantity--;
+        }
+    },
+    increment() {
+        if (this.quantity < this.stock) {
+            this.quantity++;
+        } else {
+            this.quantity = this.stock;
+            alert('Cannot add more than available stock.');
+        }
+    },
+    validateQuantity() {
+        // Convert quantity to a number and ensure it's a valid integer
+        let qty = parseInt(this.quantity);
+        
+        if (isNaN(qty) || qty < 1) {
+            this.quantity = 1;
+        } else if (qty > this.stock) {
+            this.quantity = this.stock;
+            alert('Cannot add more than available stock.');
+        } else {
+            this.quantity = qty;
+        }
+    }
+}" x-init="$watch('quantity', validateQuantity)">
     <div class="flex justify-between items-center">
-        <div class="flex items center">
-            <button wire:click="decrement" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
+        <div class="flex items-center">
+            <button x-on:click="decrement" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
                 -
             </button>
-            <input type="text" class="px-4 py-2 w-20 bg-gray-200 text-center" value="{{ $quantity }}">
-            <button wire:click="increment" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
+            <input type="text" x-model="quantity" class="px-4 py-2 w-20 bg-gray-200 text-center border-2 border-black" @change="validateQuantity">
+            <button x-on:click="increment" class="px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded">
                 +
             </button>
         </div>
     </div>
     <div class="mt-5">
         @auth()
-        <button wire:click="addToCart" class="px-4 py-2 bg-blue-500 text-white font-semibold rounded">
+        <button wire:click="addToCart" class="px-4 py-2 bg-orange-500 text-white font-semibold rounded">
             Add to Cart
         </button>
         @else

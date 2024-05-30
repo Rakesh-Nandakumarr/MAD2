@@ -25,9 +25,7 @@ return new class extends Migration {
             $table->longText('meta_keywords')->nullable();
 
             $table->float('price', 10, 2);
-            $table->Integer('quantity')->default(0);
-
-            $table->tinyInteger('order_by')->default(0);
+            $table->Integer('stock')->default(0);
             $table->boolean('status')->default(true);
 
 

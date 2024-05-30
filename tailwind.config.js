@@ -16,8 +16,23 @@ export default {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },
+            allUnset: {
+                "all-unset": {
+                    all: "unset",
+                },
+            },
         },
     },
 
     plugins: [forms, typography],
+    plugins: [
+        function ({ addUtilities }) {
+            const newUtilities = {
+                ".all-unset": {
+                    all: "unset",
+                },
+            };
+            addUtilities(newUtilities);
+        },
+    ],
 };

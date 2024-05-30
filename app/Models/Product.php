@@ -26,7 +26,6 @@ class Product extends Model implements HasMedia
         'meta_keywords',
         'quantity',
         'price',
-        'order_by',
         'status'
     ];
 

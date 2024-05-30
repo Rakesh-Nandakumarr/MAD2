@@ -5,14 +5,14 @@
     <div class="bg-white shadow-lg rounded-lg p-4">
         <div class="row">
             <div class="col-4">
-                <a href="{{ route('product.show', $product->slug) }}">
+                <a href="{{ route('productshow', $product->slug) }}">
                     <img src="asset('img\rrlogo.JPG')" alt="{{ $product->name }}"
                          class="h-full w-32 object-cover rounded">
                 </a>
             </div>
             <div class="col-8">
                 <div class="justify-between items-center">
-                    <h2 class="text-xl font-semibold text-gray-800">{{ $product->name }}</h2>
+                    <a href="{{ route('productshow', $product->slug) }}" class="text-xl font-semibold text-gray-800">{{ $product->name }}</a>
                     <span class="text-xs font-semibold text-gray-500">
                         <a href="{{ route('category.show', $product->category->slug) }}">
                             {{ $product->category->name }}

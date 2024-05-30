@@ -1,6 +1,6 @@
 <x-admin>
     <x-slot name="header">
-        Product Categories
+        Products
     </x-slot>
 
     <div class="container mx-auto mt-1 bg-white p-4 shadow rounded">
@@ -25,17 +25,16 @@
 
             <div class="sm:flex sm:items-center">
                 <div class="sm:flex-auto">
-                    <p class="text-sm text-gray-700">
-                        A list of all the product categories in your account including their name, slug and actions.
-                    </p>
+                    <p class="mt-2 text-sm text-gray-700">A list of all the products in your account including their name, description, price, and status.</p>
                 </div>
                 <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <a href="{{ route('product-category.create') }}"
+                    <a href="{{ route('product.create') }}"
                         class="block rounded-md bg-orange-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">
-                        Create Category
+                        Create Product
                     </a>
                 </div>
             </div>
+
             <div class="mt-8 flow-root">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -51,7 +50,16 @@
                                         Name</th>
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Slug</th>
+                                        Description</th>
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Stock</th>
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Price</th>
+                                    <th scope="col"
+                                        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Status</th>
                                     <th scope="col"
                                         class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Actions</th>
@@ -61,27 +69,34 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
-                                @foreach ($product_categories as $product_category)
+                                @foreach ($products as $product)
                                     <tr>
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {{ $product_category->id }}</td>
+                                            {{ $product->id }}</td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {{ $product_category->name }}</td>
+                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {{ $product->name }}</td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {{ $product_category->slug }}</td>
+                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {{ Str::limit($product->description, 50) }}</td>
+                                        <td
+                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {{ $product->stock }}</td>
+                                        <td
+                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {{ $product->price }}</td>
+                                        <td
+                                            class="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {{ $product->status ? 'Active' : 'Inactive' }}</td>
                                         <td
                                             class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                             <div class="flex gap-3">
-                                                <a href="{{ route('category.show', $product_category->slug) }}"
+                                                <a href="{{ route('product.show', $product->id) }}"
                                                     class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Show</a>
-                                                <a href="{{ route('product-category.edit', $product_category->id) }}"
+                                                <a href="{{ route('product.edit', $product->id) }}"
                                                     class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Edit</a>
-                                                <form
-                                                    action="{{ route('product-category.destroy', $product_category->id) }}"
-                                                    method="POST">
+                                                <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="rounded bg-white px-2 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Delete</button>
@@ -98,6 +113,6 @@
             </div>
         </div>
 
-        {{ $product_categories->links() }}
+        {{ $products->links() }}
     </div>
 </x-admin>

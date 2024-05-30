@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -13,7 +13,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product.index', [
+            'products' => Product::orderBy('id')->paginate(10)
+        ]);
     }
 
     /**
@@ -21,15 +23,42 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.product.form', [
+            'product' => new Product(),
+            'categories' => ProductCategory::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:product_categories,id',
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products,slug',
+            'description' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string|max:255',
+            'stock' => 'required|integer',
+            'price' => 'required|numeric',
+            'status' => 'required|boolean'
+        ]);
+        $product = Product::create($validatedData);
+
+        if ($request->hasFile('featured_image')) {
+            $product->addMedia($request->file('featured_image'))->toMediaCollection('featured_image');
+        }
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $product->addMedia($file)->toMediaCollection('gallery');
+            }
+        }
+
+        return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 
     /**
@@ -47,15 +76,46 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.product.form', [
+            'product' => $product,
+            'categories' => ProductCategory::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        //
+        $validatedData = $request->validate([
+            'category_id' => 'required|exists:product_categories,id',
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:products,slug,' . $product->id,
+            'description' => 'nullable|string',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
+            'meta_keywords' => 'nullable|string|max:255',
+            'stock' => 'required|integer',
+            'price' => 'required|numeric',
+            'order_by' => 'nullable|integer',
+            'status' => 'required|boolean'
+        ]);
+
+        $product->update($validatedData);
+
+        if ($request->hasFile('featured_image')) {
+            $product->clearMediaCollection('featured_image');
+            $product->addMedia($request->file('featured_image'))->toMediaCollection('featured_image');
+        }
+
+        if ($request->hasFile('gallery')) {
+            $product->clearMediaCollection('gallery');
+            foreach ($request->file('gallery') as $file) {
+                $product->addMedia($file)->toMediaCollection('gallery');
+            }
+        }
+
+        return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -63,6 +123,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully.');
     }
 }

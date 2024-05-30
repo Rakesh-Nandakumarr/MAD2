@@ -24,19 +24,26 @@
             <div class="w-64 bg-white p-4 shadow-lg overflow-y-auto">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Admin Panel</h2>
                 <nav>
-                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="#">Dashboard</a>
-                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="#">Orders</a>
-                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="#">Products</a>
-                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="#">Customers</a>
+                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/dashboard">Dashboard</a>
+                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/product">Products</a>
+                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/product-category">Product Category</a>
+                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/user">Users</a>
                 </nav>
             </div>
             <div class="flex-grow p-6 overflow-y-auto">
+                @if (isset($header))
                 <h2 class="text-xl font-semibold text-orange-700 mb-4">{{ $header }}</h2>
-                <div class="bg-white p-4 shadow rounded">
+                @endif
+                <div>
                     {{ $slot }}
                 </div>
             </div>
         </div>
     </div>
+    
+
+        @stack('modals')
+
+        @livewireScripts
 </body>
 </html>

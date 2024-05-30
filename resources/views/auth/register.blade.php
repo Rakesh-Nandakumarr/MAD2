@@ -1,8 +1,7 @@
-<x-app-layout>
+<x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+        
+            <img src="{{asset('img\rrlogo.JPG')}}" class="mb-4">
 
         <x-validation-errors class="mb-4" />
 
@@ -57,4 +56,4 @@
             </div>
         </form>
     </x-authentication-card>
-</x-app-layout>
+</x-guest-layout>
