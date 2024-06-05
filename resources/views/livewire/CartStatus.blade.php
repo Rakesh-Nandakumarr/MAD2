@@ -88,9 +88,14 @@ on(['cartRefresh' => function () {
                                     </button>
                                 </div>
                             @endforeach
-                            <p class="mt-1 text-sm text-gray-500">
-                                LKR {{ number_format($cart->total, 2) }}
-                            </p>
+                            <div class="flex gap-5">
+                                <p class="ml-auto text-sm font-semibold text-gray-800">
+                                    LKR {{ number_format($cart->total, 2) }}
+                                </p>
+                                <a href="/cart" class="text-sm font-semibold text-orange-800">
+                                    View Cart
+                                </a>
+                            </div>
                         @else
                             <p class="text-sm text-gray-500">No items in the cart</p>
                         @endif

@@ -63,11 +63,15 @@
             <h1 class="display-4">This week's recommendation</h1>
         </div>
 
-        <div class="grid grid-cols-3 md:grid-cols-5 gap-4 mx-10 mt-10">
-            @foreach($products as $product)
+    <div class="flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 overflow-x-auto md:overflow-visible">
+        @foreach($products as $product)
+            <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
                 <x-product :product="$product"/>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
+    </div>
+
+
 
 
     </div>

@@ -26,6 +26,8 @@ Route::get('/product/{product:slug}', [
     'show'
 ])->name('productshow');
 
+
+
 Route::get('/menu', [
     HomeController::class,
     'menu'
@@ -36,6 +38,11 @@ Route::get('/cart', [
     'cart'
 ])->name('cart');
 
+
+//order routes
+Route::get('/order', function () {
+    return view('order');
+})->name('order');
 Route::get('/category/{slug}', [
     \App\Http\Controllers\CategoryController::class,
     'show'

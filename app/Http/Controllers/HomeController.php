@@ -49,6 +49,17 @@ class HomeController extends Controller
     }
 
     public function cart(){
-        
+
+        $cart = null;
+
+        if (auth()->user()) {
+        $cart = auth()
+            ->user()
+            ->carts()
+            ->where('is_paid', false)
+            ->first();
+            
+    }
+        return view('cart', compact('cart'));
     }
 }
