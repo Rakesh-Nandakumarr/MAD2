@@ -22,7 +22,6 @@ class Order extends Model
         'shipping_city',
         'shipping_district',
         'shipping_phone',
-        'shipping_mobile',
 
         // Billing details
         'billing_first_name',
@@ -32,12 +31,10 @@ class Order extends Model
         'billing_city',
         'billing_district',
         'billing_phone',
-        'billing_mobile',
+        
         'payment_status',
         'shipping_status',
 
-        'delivery_method',
-        'payment_method',
         'shipping_total',
         'total_discount',
         'total'

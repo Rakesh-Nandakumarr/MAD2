@@ -82,7 +82,8 @@ on(['cartRefresh' => function () {
                         <p class="text-lg font-semibold text-gray-800">
                             Total: LKR {{ number_format($cart->total, 2) }}
                         </p>
-                        <a href="/" class="mt-4 w-full bg-orange-600 text-white text-center py-2 rounded-lg hover:bg-orange-700 transition duration-300">
+                        <br>
+                        <a href="/order/create" class="mt-4 w-full bg-orange-600 text-white text-center py-2 rounded-lg hover:bg-orange-700 transition duration-300 px-3">
                             Checkout
                         </a>
                     </div>

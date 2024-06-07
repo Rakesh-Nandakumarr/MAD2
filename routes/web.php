@@ -40,15 +40,14 @@ Route::get('/cart', [
 
 
 //order routes
-Route::get('/order', function () {
-    return view('order');
-})->name('order');
 Route::get('/category/{slug}', [
     \App\Http\Controllers\CategoryController::class,
     'show'
 ])->name('category.show');
 
 Route::get('/', [HomeController::class,'home'])->name('home');
+
+Route::resource('/order', \App\Http\Controllers\OrderController::class);
 
 Route::middleware([
     'role:SuperAdministrator'

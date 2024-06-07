@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->string('shipping_city');
             $table->string('shipping_district');
             $table->string('shipping_phone');
-            $table->string('shipping_mobile');
 
             $table->string('billing_first_name');
             $table->string('billing_last_name');
@@ -28,18 +27,15 @@ return new class extends Migration {
             $table->string('billing_city');
             $table->string('billing_district');
             $table->string('billing_phone');
-            $table->string('billing_mobile');
 
             $table->tinyInteger('payment_status')->default(1);
 
             $table->tinyInteger('shipping_status')->default(1);
 
 
-            $table->tinyInteger('delivery_method');
-            $table->tinyInteger('payment_method');
-            $table->float('shipping_total');
-            $table->string('total_discount');
-            $table->float('total');
+            $table->float('shipping_total')->default(0);
+            $table->string('total_discount')->default(0);
+            $table->float('total')->default(0);
 
             $table->softDeletes();
             $table->timestamps();
