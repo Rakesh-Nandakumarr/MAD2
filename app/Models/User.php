@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use App\Enums\Role;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Usamamuneerchaudhary\Commentify\Traits\HasUserAvatar;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable implements HasMedia
     use Notifiable;
     use TwoFactorAuthenticatable;
     use InteractsWithMedia;
+    use HasUserAvatar;
 
     /**
      * The attributes that are mass assignable.

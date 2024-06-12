@@ -106,6 +106,15 @@
                     </div>
 
                     <div class="sm:col-span-2">
+                        <label for="thumbnail" class="block text-sm font-medium text-gray-700">Featured Image</label>
+                        <input type="file" name="thumbnail" id="thumbnail" class="mt-1 block w-full">
+                        @if(isset($product->id) && $product->thumbnail)
+                            <img src="{{ asset($product->thumbnail) }}" alt="Thumbnail" class="mt-2 h-20">
+                        @endif
+
+                    </div>
+
+                    <!-- <div class="sm:col-span-2">
                         <label for="featured_image" class="block text-sm font-medium text-gray-700">Featured Image</label>
                         <input type="file" name="featured_image" id="featured_image" class="mt-1 block w-full">
                         @if(isset($product->id) && $product->getFirstMediaUrl('featured_image'))
@@ -123,7 +132,7 @@
                                 @endforeach
                             </div>
                         @endif
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="mt-8 flex justify-end">

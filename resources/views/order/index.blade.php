@@ -1,6 +1,6 @@
-<x-admin>
+<x-app-layout>
     <x-slot name="header">
-        Orders
+        <h1>Orders</h1>
     </x-slot>
 
     <div class="container mx-auto mt-1 bg-white p-4 shadow rounded">
@@ -30,33 +30,26 @@
                         <table class="min-w-full divide-y divide-gray-300">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">ID</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">User</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Shipping Address</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Billing Address</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Payment Status</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Delivery Status</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Shipping Status</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Created at</th>
                                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total</th>
-                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $order->id }}</td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->user->name }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->shipping_address }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->billing_address }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->payment_status }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->shipping_status }}</td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->created_at }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${{ $order->total }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm font-medium">
                                             <div class="flex gap-3">
-                                                <a href="{{ route('order.show', $order->id) }}"
-                                                    class="text-orange-600 hover:text-orange-900">Show</a> 
-                                                <a href="{{ route('order.edit', $order->id) }}"
-                                                    class="text-orange-600 hover:text-orange-900">Edit</a>
-                                                <form action="{{ route('order.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?');">
+                                                <form action="{{ route('delete', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
@@ -71,7 +64,9 @@
                 </div>
             </div>
 
-
+            <div class="mt-8">
+                {{ $orders->links() }}
+            </div>
         </div>
     </div>
-</x-admin>
+</x-app-layout>

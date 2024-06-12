@@ -126,6 +126,14 @@
                             </x-slot>
 
                             <x-slot name="content">
+                                <!-- Order Management -->
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    {{ __('Manage Order') }}
+                                </div>
+
+                                <x-dropdown-link href="{{ route('orders') }}">
+                                    {{ __('My Orders') }}
+                                </x-dropdown-link>
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ __('Manage Account') }}

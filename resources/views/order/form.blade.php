@@ -1,8 +1,5 @@
-<x-admin>
-    <h2 class="text-base font-semibold leading-7 text-orange-700">Create Orders</h2>
-    <br>
-
-    <div class="container mx-auto mt-1" x-data="{ useShippingAsBilling: true }">
+<x-app-layout>
+    <div class="container mx-auto mt-1 max-w-5xl mx-auto py-6" x-data="{ useShippingAsBilling: true }">
         <div class="space-y-10 divide-y divide-gray-900/10">
             </div>
 
@@ -11,7 +8,7 @@
                     @if($order->id)
                         action="{{ route('order.update', $order->id) }}"
                     @else
-                        action="{{ route('order.store') }}"
+                        action="/stripe"
                     @endif
                     class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
                     @csrf
@@ -22,7 +19,7 @@
                     <div class="px-4 py-6 sm:p-8">
                         <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                            <!-- Shipping Details -->
+                        
 <!-- Shipping Details -->
 <div class="col-span-full">
     <h2 class="text-lg font-semibold leading-7 text-gray-900">Shipping Details</h2>
@@ -56,16 +53,7 @@
             <input type="text" id="shipping_phone" name="shipping_phone" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" value="{{ old('shipping_phone', $order->shipping_phone) }}">
         </div>
     </div>
-    <div class="col-span-full mt-4">
-        <label for="shipping_status" class="block text-sm font-medium text-gray-700">Delivery Status</label>
-        <select id="shipping_status" name="shipping_status" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            <option value="pending" {{ old('shipping_status', $order->shipping_status) == 'pending' ? 'selected' : '' }}>Pending</option>
-            <option value="processing" {{ old('shipping_status', $order->shipping_status) == 'processing' ? 'selected' : '' }}>Processing</option>
-            <option value="delivered" {{ old('shipping_status', $order->shipping_status) == 'delivered' ? 'selected' : '' }}>Delivered</option>
-        </select>
-    </div>
 </div>
-
 
 
                             <!-- Toggle Button -->
@@ -80,7 +68,7 @@
                                 </div>
                             </div>
 
-                            <!-- Billing Details -->
+
 <!-- Billing Details -->
 <div x-show="!useShippingAsBilling" class="col-span-full mt-4">
     <h2 class="text-lg font-semibold leading-7 text-gray-900">Billing Details</h2>
@@ -121,12 +109,12 @@
                         </div>
                     </div>
                     <div class="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-                        <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                        <a href="/" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
                         <button type="submit"
-                            class="rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Save</button>
+                            class="rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600">Continue Payment</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</x-admin>
+</x-app-layout>

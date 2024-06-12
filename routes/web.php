@@ -4,7 +4,9 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Http\Controllers\StripeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 /**
  * Product routes
  */
+
+Route::post('stripe', [StripeController::class, 'stripe'])->name('stripe');
+Route::get('success', [StripeController::class, 'success'])->name('success');
+Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
+
 Route::get('/product/{product:slug}', [
     \App\Http\Controllers\ProductController::class,
     'show'
@@ -47,7 +54,11 @@ Route::get('/category/{slug}', [
 
 Route::get('/', [HomeController::class,'home'])->name('home');
 
-Route::resource('/order', \App\Http\Controllers\OrderController::class);
+Route::get('/order', [\App\Http\Controllers\HomeController::class,'order']);
+Route::get('/orders', [\App\Http\Controllers\HomeController::class,'index'])->name('orders');
+Route::delete('/order/delete', [\App\Http\Controllers\HomeController::class,'destroy'])->name('delete');
+
+Route::get('/order/create', [\App\Http\Controllers\HomeController::class,'create']);
 
 Route::middleware([
     'role:SuperAdministrator'
@@ -57,6 +68,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
         return redirect()->route('dashboard');
     });
+
+    Route::resource('/order', \App\Http\Controllers\OrderController::class);
+
     
     Route::get('/dashboard', [HomeController::class,'admin_dashboard'])->name('dashboard');
 
@@ -77,3 +91,5 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 });
+
+

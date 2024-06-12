@@ -5,7 +5,7 @@
 @if($product)
     <div class="bg-white shadow-md rounded-lg overflow-hidden transform transition duration-300 md:hover:scale-105 mx-2 md:mx-0">
         <a href="{{ route('productshow', $product->slug) }}">
-            <img src="{{ $product->getFirstMediaUrl('featured_image') }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
+            <img src="{{ asset($product->thumbnail) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover">
         </a>
         <div class="p-4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">

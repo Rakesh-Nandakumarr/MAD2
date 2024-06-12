@@ -45,7 +45,7 @@ class Order extends Model
      *
      * @return BelongsTo
      */
-    protected function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -55,7 +55,7 @@ class Order extends Model
      *
      * @return BelongsTo
      */
-    protected function cart(): BelongsTo
+    public function cart(): BelongsTo
     {
         return $this->belongsTo(Cart::class);
     }

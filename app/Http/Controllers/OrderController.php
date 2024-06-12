@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 
+
 class OrderController extends Controller
 {
     /**
@@ -15,7 +16,9 @@ class OrderController extends Controller
     public function index()
     {
         return view('admin.order.index', [
-            'orders' => Order::paginate(10)
+
+            // Fetch all orders and paginate and in the list who show the paid orders first and then the not paid ones
+            'orders' => Order::orderBy('payment_status', 'desc')->paginate(10)
         ]);
     }
 
@@ -26,7 +29,7 @@ class OrderController extends Controller
     {
         return view('admin.order.form', [
             'order' => new Order(),
-            'users' => User::all()
+            'users' => User::all(),
         ]);
     }
 
@@ -78,7 +81,21 @@ class OrderController extends Controller
 
         Order::create($validated);
 
-        return redirect()->route('order.index')->with('success', 'Order successfully created!');
+        return redirect('stripe')->with('order_products', $cart);
+    }
+
+    public function show(Order $order)
+    {
+        // Fetch the cart associated with the order
+        $cart = $order->cart;
+        // Fetch the products associated with the cart
+        $products = $cart ? $cart->products : collect();
+
+        // Pass the order and products to the view
+        return view('admin.order.show', [
+            'order' => $order,
+            'products' => $products
+        ]);
     }
 
     /**
@@ -88,7 +105,7 @@ class OrderController extends Controller
     {
         return view('admin.order.form', [
             'order' => $order,
-            'users' => User::all()
+            'users' => User::all(),
         ]);
     }
 
@@ -113,6 +130,7 @@ class OrderController extends Controller
             'billing_city' => 'nullable',
             'billing_district' => 'nullable',
             'billing_phone' => 'nullable',
+            'shipping_status' => 'required',
         ]);
 
         // Check if billing address is null and copy from shipping address if necessary

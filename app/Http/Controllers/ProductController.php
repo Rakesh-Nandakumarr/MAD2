@@ -5,6 +5,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -44,8 +48,17 @@ class ProductController extends Controller
             'meta_keywords' => 'nullable|string|max:255',
             'stock' => 'required|integer',
             'price' => 'required|numeric',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'thumbnail' => 'required|image'
         ]);
+        if($request->has('thumbnail')){
+            $file = $request->file('thumbnail');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = 'img/';
+            $file->move($path, $fileName);
+        }
+
+        $validatedData['thumbnail'] = $path.$fileName;
         $product = Product::create($validatedData);
 
         if ($request->hasFile('featured_image')) {
@@ -64,12 +77,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(Product $product)
     {
-        return view('product.show', [
-            'product' => $product
-        ]);
+        $user = auth()->user();
+        // check if user is logged in
+        $hasPurchased = false;
+
+        if(auth()->check()){
+            $hasPurchased = $user->orders()->whereHas('cart.products', function ($query) use ($product) {
+                $query->where('products.id', $product->id);
+            })->exists();
+        }
+        return view('product.show', compact('product', 'hasPurchased'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -98,8 +121,21 @@ class ProductController extends Controller
             'stock' => 'required|integer',
             'price' => 'required|numeric',
             'order_by' => 'nullable|integer',
-            'status' => 'required|boolean'
+            'status' => 'required|boolean',
+            'thumbnail' => 'required|image'
         ]);
+        if($request->has('thumbnail')){
+            $file = $request->file('thumbnail');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $path = 'img/';
+            $file->move($path, $fileName);
+            if(File::exists($product->thumbnail)){
+                File::delete($product->thumbnail);
+            }
+            
+        }
+
+        $validatedData['thumbnail'] = $path.$fileName;
 
         $product->update($validatedData);
 

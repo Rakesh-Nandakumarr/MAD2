@@ -9,12 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
 class Product extends Model implements HasMedia
 {
     use HasFactory,
         SoftDeletes,
-        InteractsWithMedia;
+        InteractsWithMedia,
+        Commentable;
 
     protected $fillable = [
         'category_id',
@@ -26,7 +28,8 @@ class Product extends Model implements HasMedia
         'meta_keywords',
         'quantity',
         'price',
-        'status'
+        'status',
+        'thumbnail',
     ];
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -45,6 +48,15 @@ class Product extends Model implements HasMedia
             ->singleFile();
 
         $this->addMediaCollection('gallery');
+    }
+
+    public function getThumbnail()
+    {
+        if (str_starts_with($this->thumbnail, 'http')) {
+            return $this->thumbnail;
+        }
+
+        return '/storage/' . $this->thumbnail;
     }
 
     /**

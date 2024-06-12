@@ -14,7 +14,8 @@
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.6",
         "spatie/laravel-medialibrary": "^10.15",
-        "stripe/stripe-php": "^14.8"
+        "stripe/stripe-php": "^14.9",
+        "usamamuneerchaudhary/commentify": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

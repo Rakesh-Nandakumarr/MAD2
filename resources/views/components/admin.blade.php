@@ -28,7 +28,7 @@
                     <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/product">Products</a>
                     <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/product-category">Product Category</a>
                     <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/user">Users</a>
-                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/Order">Orders</a>
+                    <a class="block py-2.5 px-4 rounded transition duration-200 hover:bg-orange-500 hover:text-white hover:no-underline" href="/admin/order">Orders</a>
                 </nav>
             </div>
             <div class="flex-grow p-6 overflow-y-auto">

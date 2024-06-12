@@ -28,9 +28,9 @@ return new class extends Migration {
             $table->string('billing_district');
             $table->string('billing_phone');
 
-            $table->tinyInteger('payment_status')->default(1);
+            $table->string('payment_status')->default('Not paid');
 
-            $table->tinyInteger('shipping_status')->default(1);
+            $table->string('shipping_status')->default('Pending');
 
 
             $table->float('shipping_total')->default(0);
