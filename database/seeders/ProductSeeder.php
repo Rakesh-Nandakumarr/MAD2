@@ -42,7 +42,7 @@ class ProductSeeder extends Seeder
                 'image' => 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fultra-hd&psig=AOvVaw2x9H6jLQoSJGFJIyDg7P0C&ust=1716224288995000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCq6OmXmoYDFQAAAAAdAAAAABAE',
             ],
             [
-                'category_id' => 1,
+                'category_id' => 5,
                 'name' => 'Latte',
                 'slug' => Str::slug('Latte'),
                 'description' => 'A smooth and creamy coffee drink made with espresso and steamed milk.',

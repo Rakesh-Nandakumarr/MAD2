@@ -25,6 +25,7 @@ use App\Http\Controllers\StripeController;
  */
 
 Route::post('stripe', [StripeController::class, 'stripe'])->name('stripe');
+Route::get('paynow/{order}', [StripeController::class, 'paynow'])->name('paynow');
 Route::get('success', [StripeController::class, 'success'])->name('success');
 Route::get('cancel', [StripeController::class, 'cancel'])->name('cancel');
 
@@ -62,15 +63,15 @@ Route::get('/order/create', [\App\Http\Controllers\HomeController::class,'create
 
 Route::middleware([
     'role:SuperAdministrator'
-])->group(function () {
-
-Route::group(['prefix' => 'admin'], function () {
+    ])->group(function () {
+        
+        Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
         return redirect()->route('dashboard');
     });
-
+    
     Route::resource('/order', \App\Http\Controllers\OrderController::class);
-
+    
     
     Route::get('/dashboard', [HomeController::class,'admin_dashboard'])->name('dashboard');
 
@@ -92,4 +93,5 @@ Route::group(['prefix' => 'admin'], function () {
 
 });
 
+Route::get('/order/{order}', [\App\Http\Controllers\HomeController::class,'show'])->name('ordershow');
 

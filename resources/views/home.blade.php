@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <body>
 
     <!-- Carousel Start -->
@@ -32,25 +31,22 @@
         </div>
     </div>
     <!-- Carousel End -->
+
     <div class="container-fluid pt-5">
         <div class="section-title">
             <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our new and improved</h4>
             <h1 class="display-4">This week's recommendation</h1>
         </div>
 
-    <div class="flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 overflow-x-auto md:overflow-visible">
-        @foreach($products as $product)
-            <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
-                <x-product :product="$product"/>
-            </div>
-        @endforeach
+        <div class="flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 overflow-x-auto md:overflow-visible">
+            @foreach($products as $product)
+                <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
+                    <x-product :product="$product"/>
+                </div>
+            @endforeach
+        </div>
     </div>
 
-
-
-
-    </div>
-    </div>
     <!-- Offer Start -->
     <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
         <div class="container py-5">
@@ -61,86 +57,22 @@
     </div>
     <!-- Offer End -->
 
-
     <!-- Menu Start -->
     <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">high in-demand</h4>
-                <h1 class="display-4">Top Seller's</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Hot Coffee</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-1.jpg" alt="">
-                            <h5 class="menu-price">$5</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-2.jpg" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-3.jpg" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
+        <div class="section-title">
+            <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Menu</h4>
+            <h1 class="display-4">Discover Our Coffee</h1>
+        </div>
+
+        <div class="flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-6 overflow-x-auto md:overflow-visible">
+            @foreach($products as $product)
+                <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
+                    <x-product :product="$product"/>
                 </div>
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Cold Coffee</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-1.jpg" alt="">
-                            <h5 class="menu-price">$5</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Black Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-2.jpg" alt="">
-                            <h5 class="menu-price">$7</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Chocolete Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="img/menu-3.jpg" alt="">
-                            <h5 class="menu-price">$9</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Coffee With Milk</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo guberg sea et et lorem dolor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- Menu End -->
-
 
     <!-- Reservation Start -->
     <div class="container-fluid my-5">
@@ -153,12 +85,11 @@
                                 <h1 class="display-3 text-primary">30% OFF</h1>
                                 <h1 class="text-white">For Online Reservation</h1>
                             </div>
-                            <p class="text-white">Lorem justo clita erat lorem labore ea, justo dolor lorem ipsum ut sed eos,
-                                ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea</p>
+                            <p class="text-white">Book a table online and enjoy an exclusive 30% discount on your total bill. Experience the best of our offerings in a relaxed setting.</p>
                             <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Comfortable seating</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Personalized service</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Special menu options</li>
                             </ul>
                         </div>
                     </div>
@@ -166,6 +97,7 @@
                     <div class="col-lg-6">
                         <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
                             <h1 class="text-white mb-4 mt-5">Book Your Table Now!</h1>
+                            <!-- Add your reservation form here -->
                         </div>
                     </div>
                 </div>
@@ -189,8 +121,7 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-truck service-icon"></i>Fastest Door Delivery</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit
-                                invidunt, dolore tempor diam ipsum takima erat tempor</p>
+                            <p class="m-0">Enjoy our fastest door delivery service, bringing your favorite coffee right to your doorstep with utmost care and efficiency.</p>
                         </div>
                     </div>
                 </div>
@@ -201,8 +132,7 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-coffee service-icon"></i>Fresh Coffee Beans</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit
-                                invidunt, dolore tempor diam ipsum takima erat tempor</p>
+                            <p class="m-0">We source the freshest and highest quality coffee beans to ensure every cup you drink is perfect.</p>
                         </div>
                     </div>
                 </div>
@@ -213,8 +143,7 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-award service-icon"></i>Best Quality Coffee</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit
-                                invidunt, dolore tempor diam ipsum takima erat tempor</p>
+                            <p class="m-0">Our commitment to quality means you enjoy the best coffee experience, with beans sourced from sustainable farms around the world.</p>
                         </div>
                     </div>
                 </div>
@@ -225,8 +154,7 @@
                         </div>
                         <div class="col-sm-7">
                             <h4><i class="fa fa-table service-icon"></i>Online Table Booking</h4>
-                            <p class="m-0">Sit lorem ipsum et diam elitr est dolor sed duo. Guberg sea et et lorem dolor sed est sit
-                                invidunt, dolore tempor diam ipsum takima erat tempor</p>
+                            <p class="m-0">Reserve your table online easily and enjoy our cozy and welcoming atmosphere.</p>
                         </div>
                     </div>
                 </div>
@@ -240,13 +168,13 @@
         <div class="container">
             <div class="section-title">
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h4>
-                <h1 class="display-4">Serving Since 1950</h1>
+                <h1 class="display-4">Serving Since 2005</h1>
             </div>
             <div class="row">
                 <div class="col-lg-4 py-0 py-lg-5">
                     <h1 class="mb-3">Our Story</h1>
-                    <h5 class="mb-3">Eos kasd eos dolor vero vero, lorem stet diam rebum. Ipsum amet sed vero dolor sea</h5>
-                    <p>Takimata sed vero vero no sit sed, justo clita duo no duo amet et, nonumy kasd sed dolor eos diam lorem eirmod. Amet sit amet amet no. Est nonumy sed labore eirmod sit magna. Erat at est justo sit ut. Labor diam sed ipsum et eirmod</p>
+                    <h5 class="mb-3">From a humble beginning to a community favorite, our journey has been fueled by our passion for coffee.</h5>
+                    <p>In 2005, we opened our doors with a mission to serve the finest coffee and create a place where everyone feels at home. Over the years, we have grown, but our commitment to quality and community remains unchanged.</p>
                     <a href="" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Learn More</a>
                 </div>
                 <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
@@ -254,12 +182,12 @@
                         <img class="position-absolute w-100 h-100" src="img/about.png" style="object-fit: cover;">
                     </div>
                 </div>
-                <div class="col-lg-4 py-0 py-lg-5">
+                    <div class="col-lg-4 py-0 py-lg-5">
                     <h1 class="mb-3">Our Vision</h1>
-                    <p>Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor</p>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</h5>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</h5>
-                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Lorem ipsum dolor sit amet</h5>
+                    <p>We aim to create the ultimate coffee experience for every customer, fostering a sense of community and sustainability.</p>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Quality Coffee</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Cozy Ambiance</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Exceptional Service</h5>
                     <a href="" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Learn More</a>
                 </div>
             </div>
@@ -303,16 +231,13 @@
         </div>
         <div class="container-fluid text-center text-white border-top mt-4 py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights Reserved.</a></p>
-            C        </div>
+        </div>
     </div>
     <!-- Footer End -->
 
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
     <!-- JavaScript Libraries -->
+    <x-bottom-nav />
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
@@ -331,3 +256,5 @@
     </body>
 
 </x-app-layout>
+
+

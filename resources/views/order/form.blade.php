@@ -6,7 +6,7 @@
             <div class="shadow rounded">
                 <form method="post"
                     @if($order->id)
-                        action="{{ route('order.update', $order->id) }}"
+                        action="{{ route('stripee', $order->id) }}"
                     @else
                         action="/stripe"
                     @endif

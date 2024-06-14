@@ -143,12 +143,6 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <x-dropdown-link href="{{ route('api-tokens.index') }}">
-                                        {{ __('API Tokens') }}
-                                    </x-dropdown-link>
-                                @endif
-
                                 <div class="border-t border-gray-200"></div>
 
                                 <!-- Authentication -->
@@ -178,6 +172,7 @@
             </div>
 
             <!-- Hamburger -->
+            @auth
             <div class="-me-2 flex items-center sm:hidden">
                 <button @click="open = ! open"
                         class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -190,16 +185,22 @@
                     </svg>
                 </button>
             </div>
+            @else
+
+                <div class="-me-2 flex flex gap-3 mt-4 justify-end sm:hidden">
+                    <a href="{{ route('login') }}" class="transition duration-150 ease-in-out ml-4 font-semibold text-orange-700 hover:text-yellow-700 dark:text-orange-700 dark:hover:text-yellow-700 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-700">Log in</a>
+                
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="transition duration-150 ease-in-out ml-4 font-semibold text-orange-700 hover:text-yellow-700 dark:text-orange-700 dark:hover:text-yellow-700 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-700">Register</a>
+                @endif
+                </div>
+            @endauth
         </div>
     </div>
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div>
 
         @auth
             <!-- Responsive Settings Options -->
@@ -225,12 +226,6 @@
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
-                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                        <x-responsive-nav-link href="{{ route('api-tokens.index') }}"
-                                               :active="request()->routeIs('api-tokens.index')">
-                            {{ __('API Tokens') }}
-                        </x-responsive-nav-link>
-                    @endif
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>

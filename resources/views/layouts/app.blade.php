@@ -8,6 +8,9 @@
         <meta name="author" content="Rakesh">
         <meta name="description" content="{{ $metaDescription }}">
         <meta name="keywords" content="{{ $metaKeywords }}">
+        <meta name="theme-color" content="#FCD299"/>
+        <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+        <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
 
         <!-- Fonts -->
@@ -72,5 +75,22 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="{{ asset('/sw.js') }}"></script>
+        <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+        </script>
     </body>
 </html>

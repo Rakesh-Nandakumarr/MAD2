@@ -85,6 +85,45 @@ class StripeController extends Controller
         }
     }
 
+    public function paynow(Request $request, Order $order)
+    {
+        // get the cart of the order
+        $cart = Cart::find($order->cart_id);
+
+        
+        $lineitems = [];
+        $products = $cart ? $cart->products : collect();
+        foreach ($products  as $product){
+            $lineitems[] = [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => $product->name,
+                        ],
+                        'unit_amount' => $product->pivot->price * 100,
+                    ],
+                    'quantity' => $product->pivot->quantity,
+                ];
+        }
+
+        $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+        $response = $stripe->checkout->sessions->create([
+            'line_items' => $lineitems,
+            'mode' => 'payment',
+            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('cancel'),
+        ]);
+
+        if (isset($response->id) && $response->id != '') {
+            session()->put('order_id', $order->id);
+            return redirect($response->url);
+        } else {
+            return redirect()->route('cancel');
+        }
+    
+
+    }
+
     public function success(Request $request)
     {
         if (isset($request->session_id)) {
@@ -99,6 +138,10 @@ class StripeController extends Controller
                 $order = Order::find($order_id);
                 if ($order) {
                     $order->update(['payment_status' => 'Paid']);
+                    // get the cart of the order
+                    $cart = Cart::find($order->cart_id);
+                    // make the cart is_paid to true
+                    $cart->update(['is_paid' => true]);
                 }
             }
 

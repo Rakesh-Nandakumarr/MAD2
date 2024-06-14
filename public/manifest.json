@@ -1,0 +1,17 @@
+{
+    "name": "Roast&Relax",
+    "short_name": "Roast&Relax",
+    "start_url": "/index.php",
+    "display": "standalone",
+    "background": "#ffffff",
+    "theme_color": "#FCD299",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "img/rrlogo.png",
+            "type": "image/png",
+            "sizes": "480x480",
+            "purpose": "any"
+        }
+    ]
+}

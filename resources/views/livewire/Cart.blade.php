@@ -60,7 +60,7 @@ on(['cartRefresh' => function () {
                 @if($cart && count($cart->products) > 0)
                     @foreach($cart->products as $product)
                         <div class="flex items-center bg-gray-50 p-4 rounded-lg shadow-sm">
-                            <img src="{{ $product->getFirstMediaUrl('featured_image') }}"
+                            <img src="{{ $product->thumbnail }}"
                                  class="w-16 h-16 object-cover rounded-lg">
                             <div class="ml-4 flex-1">
                                 <h4 class="text-lg font-medium text-gray-800">{{ $product->name }}</h4>

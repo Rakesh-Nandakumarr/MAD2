@@ -69,10 +69,16 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('order.index', [
-            'orders' => Order::paginate(10)
-        ]);
+
+    // pass only the logged user's orders to the view
+    $userOrders = auth()->user()->orders()->paginate(10);
+
+    return view('order.index', [
+        'orders' => $userOrders
+    ]);
+
     }
+
 
     public function create()
     {
@@ -135,5 +141,16 @@ class HomeController extends Controller
         $order->delete();
 
         return redirect()->route('orders')->with('success', 'Order successfully deleted!');
+    }
+
+    // give the show method the order model
+    public function show(Order $order)
+    {
+        // Fetch the cart associated with the order
+        $cart = $order->cart;
+        // Fetch the products associated with the cart
+        $products = $cart ? $cart->products : collect();
+
+        return view('order.show', compact('order', 'products'));
     }
 }

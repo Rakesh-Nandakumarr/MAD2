@@ -48,13 +48,19 @@
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $order->created_at }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">${{ $order->total }}</td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm font-medium">
-                                            <div class="flex gap-3">
+                                            @if ($order->payment_status == 'Not paid')
+                                            <div class="flex gap-5">
+                                                <a href="{{ route('ordershow', $order->id) }}"
+                                                    class="text-orange-600 hover:text-orange-900">Show</a> 
+                                                <a href="{{ route('paynow', $order) }}"
+                                                    class="text-green-600 hover:text-green-900">Pay now</a>
                                                 <form action="{{ route('delete', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="text-red-600 hover:text-red-900">Delete</button>
                                                 </form>
                                             </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -69,4 +75,7 @@
             </div>
         </div>
     </div>
+
+        <x-bottom-nav />
+
 </x-app-layout>
