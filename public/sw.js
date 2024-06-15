@@ -2,7 +2,10 @@ const CACHE_NAME = "offline-v1";
 const filesToCache = [
     "/",
     "/menu",
-    "/orders"
+    "/orders",
+    "/user/profile",
+    "/cart",
+    "/order/create",
 ];
 
 const preLoad = function () {
