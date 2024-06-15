@@ -122,7 +122,6 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'order_by' => 'nullable|integer',
             'status' => 'required|boolean',
-            'thumbnail' => 'required|image'
         ]);
         if($request->has('thumbnail')){
             $file = $request->file('thumbnail');
@@ -131,11 +130,12 @@ class ProductController extends Controller
             $file->move($path, $fileName);
             if(File::exists($product->thumbnail)){
                 File::delete($product->thumbnail);
+                $validatedData['thumbnail'] = $path.$fileName;
             }
             
         }
 
-        $validatedData['thumbnail'] = $path.$fileName;
+        
 
         $product->update($validatedData);
 

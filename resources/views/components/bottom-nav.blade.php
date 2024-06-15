@@ -22,7 +22,7 @@
                 </svg>
                 <span class="block text-xs mt-1">My Cart</span>
             </a>
-            <a href="orders" class="w-full py-2.5 text-center transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <a href="/orders" class="w-full py-2.5 text-center transition duration-300 ease-in-out transform hover:-translate-y-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4m0-2a7 7 0 11-14 0a7 7 0 0114 0z"/>
                 </svg>
