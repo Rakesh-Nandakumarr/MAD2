@@ -61,16 +61,6 @@ class ProductController extends Controller
         $validatedData['thumbnail'] = $path.$fileName;
         $product = Product::create($validatedData);
 
-        if ($request->hasFile('featured_image')) {
-            $product->addMedia($request->file('featured_image'))->toMediaCollection('featured_image');
-        }
-
-        if ($request->hasFile('gallery')) {
-            foreach ($request->file('gallery') as $file) {
-                $product->addMedia($file)->toMediaCollection('gallery');
-            }
-        }
-
         return redirect()->route('product.index')->with('success', 'Product created successfully.');
     }
 
@@ -123,33 +113,18 @@ class ProductController extends Controller
             'order_by' => 'nullable|integer',
             'status' => 'required|boolean',
         ]);
+
         if($request->has('thumbnail')){
             $file = $request->file('thumbnail');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $path = 'img/';
             $file->move($path, $fileName);
-            if(File::exists($product->thumbnail)){
-                File::delete($product->thumbnail);
-                $validatedData['thumbnail'] = $path.$fileName;
-            }
-            
+            $validatedData['thumbnail'] = $path.$fileName;
+            File::delete($product->thumbnail);
         }
 
         
-
         $product->update($validatedData);
-
-        if ($request->hasFile('featured_image')) {
-            $product->clearMediaCollection('featured_image');
-            $product->addMedia($request->file('featured_image'))->toMediaCollection('featured_image');
-        }
-
-        if ($request->hasFile('gallery')) {
-            $product->clearMediaCollection('gallery');
-            foreach ($request->file('gallery') as $file) {
-                $product->addMedia($file)->toMediaCollection('gallery');
-            }
-        }
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully.');
     }

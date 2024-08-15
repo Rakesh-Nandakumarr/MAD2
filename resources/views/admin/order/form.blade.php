@@ -25,7 +25,7 @@
                             <!-- Shipping Details -->
 <!-- Shipping Details -->
 <div class="col-span-full">
-    <h2 class="text-lg font-semibold leading-7 text-gray-900">Shipping Details</h2>
+    <h2 class="text-lg font-semibold leading-7 text-gray-900">Delivery Details</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
         <div>
             <label for="shipping_first_name" class="block text-sm font-medium text-gray-700">First Name</label>

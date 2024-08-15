@@ -1,7 +1,7 @@
 
-# Roast and Relax Coffee Shop CMS System
+# Roast and Relax Coffee Shop CRM System
 
-<p align="center"><img src="public/img/rrlogo.png" width="400" alt="Roast and Relax Logo"></p>
+<p align="center"><img src="public/images/logo.png" width="400" alt="Roast and Relax Logo"></p>
 
 ## Table of Contents
 1. [About the Project](#about-the-project)
@@ -169,3 +169,5 @@ The project will follow an agile development methodology with an estimated timel
    npm run dev
    ```
 
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.

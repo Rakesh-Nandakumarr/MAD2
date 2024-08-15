@@ -5,7 +5,7 @@
         <h2 class="text-3xl font-bold mb-6 text-center">Order Form</h2>
         <form action="/orders" method="POST">
             <!-- Shipping Details -->
-            <h3 class="text-xl font-semibold mb-4">Shipping Details</h3>
+            <h3 class="text-xl font-semibold mb-4">Delivery Details</h3>
             <div class="grid grid-cols-1 gap-4">
                 <div>
                     <label for="shipping_first_name" class="block text-sm font-medium text-gray-700">First Name</label>

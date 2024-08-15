@@ -9,7 +9,7 @@
 
             <div class="shadow rounded">
                 <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 p-6">
-                    <h3 class="text-lg font-semibold leading-7 text-gray-900">Shipping Details</h3>
+                    <h3 class="text-lg font-semibold leading-7 text-gray-900">Delivery Details</h3>
                     <p>Name: {{ $order->shipping_first_name }} {{ $order->shipping_last_name }}</p>
                     <p>Address: {{ $order->shipping_address }}, {{ $order->shipping_post_code }}, {{ $order->shipping_city }}, {{ $order->shipping_district }}</p>
                     <p>Phone: {{ $order->shipping_phone }}</p>

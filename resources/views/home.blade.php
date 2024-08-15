@@ -43,6 +43,9 @@
                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
                     <x-product :product="$product"/>
                 </div>
+                @if($loop->iteration == 4)
+                    @break
+                @endif
             @endforeach
         </div>
     </div>
@@ -69,6 +72,9 @@
                 <div class="flex-shrink-0 w-2/3 sm:w-1/2 md:w-auto">
                     <x-product :product="$product"/>
                 </div>
+                @if($loop->iteration == 8)
+                    @break
+                @endif
             @endforeach
         </div>
     </div>
